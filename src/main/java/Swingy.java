@@ -1,4 +1,5 @@
 import Player.Hero;
+import game.board;
 import gui.Swing;
 
 import java.util.InputMismatchException;
@@ -32,6 +33,7 @@ public class Swingy {
                     }
                 }
                 Hero player = new Hero(name, cls);
+                board Board = new board();
 
             }
             else if (game.equals("GUI")) {

@@ -18,7 +18,7 @@
           <background color="-16776383"/>
           <icon value="Footsoldier.png"/>
           <inheritsPopupMenu value="true"/>
-          <text value="Foot Soldier"/>
+          <text value="Foot Soldier - Class 1"/>
         </properties>
       </component>
       <component id="7a8c4" class="javax.swing.JButton" binding="a3KnightButton" default-binding="true">
@@ -28,7 +28,7 @@
         <properties>
           <background color="-16776245"/>
           <icon value="Knight.png"/>
-          <text value="Knight"/>
+          <text value="Knight - Class 3"/>
         </properties>
       </component>
       <component id="6097e" class="javax.swing.JButton" binding="a2ArcherButton" default-binding="true">
@@ -38,7 +38,7 @@
         <properties>
           <background color="-16776326"/>
           <icon value="Archer.png"/>
-          <text value="Archer"/>
+          <text value="Archer - Class 2"/>
         </properties>
       </component>
       <component id="1240f" class="javax.swing.JLabel">

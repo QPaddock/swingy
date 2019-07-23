@@ -1,5 +1,7 @@
 package Player;
 
+import java.util.Random;
+
 public class Hero {
     private String heroName;
     private int heroClass;
@@ -8,16 +10,21 @@ public class Hero {
     private int helm;
     private int XP;
     private int level;
+    public int x;
+    public int y;
     protected int Experience;
     protected int Attack;
     protected int Defense;
     protected int hitPoints;
 
     public Hero(String name, int cls) {
+        Random r = new Random();
         setHeroName(name);
         setHeroClass(cls);
         setXP(0);
         setLevel(0);
+        setX(r.nextInt(10));
+        setY(r.nextInt(10));
         if (cls == 1) {
             setHitPoints(100);
             setDefense(1);
@@ -70,6 +77,14 @@ public class Hero {
         this.level = level;
     }
 
+    public void setX(int x) {
+        this.x = x;
+    }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public void setExperience(int experience) {
         Experience = experience;
     }
@@ -112,6 +127,14 @@ public class Hero {
 
     public int getLevel() {
         return level;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 
     public int getExperience() {
