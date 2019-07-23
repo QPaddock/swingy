@@ -36,7 +36,7 @@ public class Hero {
             setAttack(40);
             System.out.println("Knight " + name + " created");
         }
-        System.out.printf("Hit Points = %d\nAttack = %d\nDefense = %d", getHitPoints(), getAttack(), getDefense());
+        System.out.printf("Hit Points = %d\nAttack = %d\nDefense = %d\n", getHitPoints(), getAttack(), getDefense());
     }
 
     public void setHeroName(String heroName) {

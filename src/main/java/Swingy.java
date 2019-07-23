@@ -1,4 +1,5 @@
 import Player.Hero;
+import gui.Swing;
 
 import java.util.InputMismatchException;
 import java.util.Scanner;
@@ -32,6 +33,10 @@ public class Swingy {
                 }
                 Hero player = new Hero(name, cls);
 
+            }
+            else if (game.equals("GUI")) {
+                Swing swing = new Swing();
+                swing.showMenu();
             }
             else
                 System.out.println("Error: No Arguments");
