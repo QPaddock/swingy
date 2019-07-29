@@ -4,6 +4,7 @@ import java.util.Random;
 
 public class Hero {
     private String heroName;
+    public Boolean alive;
     private int heroClass;
     private int weapon;
     private int armor;
@@ -20,11 +21,10 @@ public class Hero {
     public Hero(String name, int cls) {
         Random r = new Random();
         setHeroName(name);
+        setAlive(true);
         setHeroClass(cls);
         setXP(0);
-        setLevel(0);
-        setX(r.nextInt(10));
-        setY(r.nextInt(10));
+        setLevel(1);
         if (cls == 1) {
             setHitPoints(100);
             setDefense(1);
@@ -50,6 +50,10 @@ public class Hero {
         this.heroName = heroName;
     }
 
+    public void setAlive(Boolean alive) {
+        this.alive = alive;
+    }
+
     public void setHeroClass(int heroClass) {
         this.heroClass = heroClass;
     }
@@ -71,6 +75,9 @@ public class Hero {
 
     public void setXP(int xp) {
         this.XP = xp;
+        if (this.XP == (this.level + 1) * 1000 + (((this.level + 1) - 1)*((this.level + 1) - 1))*450) {
+            setLevel(getLevel()+1);
+        }
     }
 
     public void setLevel(int level) {
@@ -99,10 +106,16 @@ public class Hero {
 
     public void setHitPoints(int hitPoints) {
         this.hitPoints = hitPoints;
+        if (this.hitPoints <= 0)
+            setAlive(false);
     }
 
     public String getHeroName() {
         return heroName;
+    }
+
+    public Boolean getAlive() {
+        return alive;
     }
 
     public int getHeroClass() {

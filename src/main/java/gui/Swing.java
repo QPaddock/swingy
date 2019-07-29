@@ -9,6 +9,7 @@ import java.awt.event.WindowEvent;
 public class Swing {
 
     final JFrame f = new JFrame("Trying");
+    Hero player;
 
     public void Swings() {
         f.setSize(600, 600);
@@ -22,7 +23,7 @@ public class Swing {
     }
 
     public void initHero(String name, int cls) {
-        Hero player = new Hero(name, cls);
+        player = new Hero(name, cls);
         JLabel label = new JLabel();
         if (cls == 1) {
             ImageIcon img = new ImageIcon("Footsoldier.png");
