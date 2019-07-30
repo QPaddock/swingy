@@ -13,18 +13,18 @@ public class Run {
     public int getMove(Enemy[] enemy, Hero player, Board board){
         Scanner scan = new Scanner(System.in);
         String move;
-        System.out.printf("Please enter %s's move: ", player.getHeroName());
+        System.out.printf("Please enter %s's move (North, South, East, West)/(N, S, E, W): \n", player.getHeroName());
         move = scan.next().toUpperCase();
-        if (move.equals("NORTH")) {
+        if (move.equals("NORTH") || move.equals("N")) {
             player.setY(player.getY() - 1);
         }
-        else if (move.equals("SOUTH")) {
+        else if (move.equals("SOUTH") || move.equals("S")) {
             player.setY(player.getY() + 1);
         }
-        else if (move.equals("EAST")) {
+        else if (move.equals("EAST") || move.equals("E")) {
             player.setX(player.getX() + 1);
         }
-        else if (move.equals("WEST")) {
+        else if (move.equals("WEST") || move.equals("W")) {
             player.setX(player.getX() - 1);
         }
         else {
@@ -38,8 +38,13 @@ public class Run {
         if (res == 2) {
             res = FightOrFlight(enemy, player);
             if (res == 1) {
-                System.out.println("here too");
                 board.moveHero(player, 1);
+            }
+            if (res == 2) {
+                board.moveHero(player, 0);
+            }
+            else {
+                return 0;
             }
         }
         return 0;
@@ -61,13 +66,13 @@ public class Run {
                         return 1;
                     }
                     else {
-                        System.out.println("Ran Unsuccessfully");
-                        fightSim(enemy, player, i);
+                        System.out.println("Ran Unsuccessfully\nFighting!");
+                        return fightSim(enemy, player, i);
                     }
                 }
                 else if (move.equals("FIGHT")) {
-                    System.out.println("FIGHTING");
-                    fightSim(enemy, player, i);
+                    System.out.println("Fighting!");
+                    return fightSim(enemy, player, i);
                 }
                 else {
                     System.out.println("Default, You are running!");
@@ -78,25 +83,56 @@ public class Run {
         return 1;
     }
 
-    private void fightSim(Enemy[] enemy, Hero player, int i) {
+    private int fightSim(Enemy[] enemy, Hero player, int i) {
         int fightres = Fight(player, enemy[i]);
         if (fightres == 1) {
             System.out.println("Enemy Defeated!");
-            enemy[i].setAlive(false);
+            Random r = new Random();
+            int res = r.nextInt(5);
+            if (res == 1){
+                System.out.println("Enemy dropped weapon!");
+                res = r.nextInt(30);
+                player.setWeapon(res);
+                System.out.printf("Attack increases by %d\n", res);
+            }
+            else if (res == 2) {
+                System.out.println("Enemy dropped armor!");
+                res = r.nextInt(30);
+                player.setArmor(res);
+                System.out.printf("Defense increases by %d\n", res);
+            }
+            else if (res == 3) {
+                System.out.println("Enemy dropped helmet!");
+                res = r.nextInt(30);
+                player.setHelm(res);
+                System.out.printf("Hit points increases by %d\n", res);
+            }
+            System.out.println(res);
+            return 2;
         }
         else if (fightres == 0) {
             System.out.println("Player Dead!");
-            player.setAlive(false);
+            return 0;
         }
+        return 1;
     }
 
     private int Fight(Hero player, Enemy enemy) {
+        int res;
         while (true) {
-            player.setHitPoints(player.getHitPoints() - (enemy.getAttack() - player.getDefense()));
+            res = (enemy.getAttack() - player.getDefense());
+            if (res < 0)
+                res = 0;
+            player.setHitPoints(player.getHitPoints() - res);
+            System.out.printf("Enemy hits %s delivering %d of damage. %s has %d Health left!\n", player.getHeroName(), res, player.getHeroName(), player.getHitPoints());
             if (!player.getAlive()) {
                 return 0;
             }
-            enemy.setHitPoints(enemy.getHitPoints() - (player.getAttack() - enemy.getDefense()));
+            res = (player.getAttack() - enemy.getDefense());
+            if (res < 0)
+                res = 0;
+            enemy.setHitPoints(enemy.getHitPoints() - res);
+            System.out.printf("%s hits %s delivering %d of damage. %s has %d Health left!\n", player.getHeroName(),"Enemy", res,"Enemy", enemy.getHitPoints());
             if (!enemy.getAlive()){
                 return 1;
             }

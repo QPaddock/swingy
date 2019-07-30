@@ -12,9 +12,9 @@ public class Enemy {
 
     public Enemy(int level, int size) {
         Random r = new Random();
-        setAttack((r.nextInt(60)));
-        setDefense((r.nextInt(50)));
-        setHitPoints((r.nextInt(100)));
+        setAttack((r.nextInt(80)));
+        setDefense(0);
+        setHitPoints((r.nextInt(110)));
         setX(r.nextInt(size));
         setY(r.nextInt(size));
         setAlive(true);
@@ -41,7 +41,11 @@ public class Enemy {
     }
 
     public void setHitPoints(int hitPoints) {
+        if (hitPoints <= 0)
+            hitPoints = 0;
         this.hitPoints = hitPoints;
+        if (this.hitPoints <= 0)
+            setAlive(false);
     }
 
     public Boolean getAlive() {

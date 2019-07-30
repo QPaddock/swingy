@@ -27,8 +27,8 @@ public class Hero {
         setLevel(1);
         if (cls == 1) {
             setHitPoints(100);
-            setDefense(1);
-            setAttack(12);
+            setDefense(10);
+            setAttack(20);
             System.out.println("Foot Soldier " + name + " created");
         }
         else if (cls == 2) {
@@ -105,6 +105,8 @@ public class Hero {
     }
 
     public void setHitPoints(int hitPoints) {
+        if (hitPoints <= 0)
+            hitPoints = 0;
         this.hitPoints = hitPoints;
         if (this.hitPoints <= 0)
             setAlive(false);
