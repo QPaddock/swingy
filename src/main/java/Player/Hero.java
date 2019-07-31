@@ -1,5 +1,9 @@
 package Player;
 
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Random;
 
 public class Hero {
@@ -13,7 +17,6 @@ public class Hero {
     private int level;
     public int x;
     public int y;
-    protected int Experience;
     protected int Attack;
     protected int Defense;
     protected int hitPoints;
@@ -74,8 +77,15 @@ public class Hero {
     }
 
     public void setXP(int xp) {
+        int next = (this.level) * 1000 + (((this.level) - 1)*((this.level) - 1))*450;
+        System.out.printf("XP: %d/%d\n", xp, next);
         this.XP = xp;
-        if (this.XP == (this.level + 1) * 1000 + (((this.level + 1) - 1)*((this.level + 1) - 1))*450) {
+        if (this.XP >= next) {
+            System.out.println("Leveled up! Current level: " + (getLevel()+1) + " Hit Points, Defense and Attack");
+            setHitPoints(getHitPoints() + (level * 10));
+            setAttack(getAttack() + 10);
+            setDefense(getDefense() + 10);
+            System.out.printf("Hit Points = %d\nAttack = %d\nDefense = %d\n", getHitPoints(), getAttack(), getDefense());
             setLevel(getLevel()+1);
         }
     }
@@ -90,10 +100,6 @@ public class Hero {
 
     public void setY(int y) {
         this.y = y;
-    }
-
-    public void setExperience(int experience) {
-        Experience = experience;
     }
 
     public void setAttack(int attack) {
@@ -150,10 +156,6 @@ public class Hero {
 
     public int getY() {
         return y;
-    }
-
-    public int getExperience() {
-        return Experience;
     }
 
     public int getAttack() {

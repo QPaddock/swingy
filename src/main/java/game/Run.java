@@ -87,27 +87,27 @@ public class Run {
         int fightres = Fight(player, enemy[i]);
         if (fightres == 1) {
             System.out.println("Enemy Defeated!");
+            player.setXP(player.getXP() + (enemy[i].getAttack() + enemy[i].getHitPoints()) * 10);
             Random r = new Random();
             int res = r.nextInt(5);
             if (res == 1){
                 System.out.println("Enemy dropped weapon!");
-                res = r.nextInt(30);
+                res = r.nextInt(5);
                 player.setWeapon(res);
                 System.out.printf("Attack increases by %d\n", res);
             }
             else if (res == 2) {
                 System.out.println("Enemy dropped armor!");
-                res = r.nextInt(30);
+                res = r.nextInt(5);
                 player.setArmor(res);
                 System.out.printf("Defense increases by %d\n", res);
             }
             else if (res == 3) {
                 System.out.println("Enemy dropped helmet!");
-                res = r.nextInt(30);
+                res = r.nextInt(5);
                 player.setHelm(res);
                 System.out.printf("Hit points increases by %d\n", res);
             }
-            System.out.println(res);
             return 2;
         }
         else if (fightres == 0) {

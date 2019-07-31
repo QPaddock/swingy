@@ -36,7 +36,6 @@ public class Board {
     }
 
     public void placeEnemy(Enemy enemy) {
-        System.out.printf("Enemy X: %d Enemy Y: %d\n", enemy.getX(), enemy.getY());
         if (board[enemy.getX()][enemy.getY()] == hero) {
             enemy.setX(enemy.getX()+1);
             placeEnemy(enemy);
@@ -47,11 +46,10 @@ public class Board {
 
     public int moveHero(Hero player, int com) {
         if (com == 0) {
-            if (player.getX() > this.x - 1 || player.getY() > this.y - 1) {
+            if (player.getX() > this.x - 1 || player.getY() > this.y - 1 || player.getX() < 0 || player.getY() < 0) {
                 return 1;
             }
             if (checkEnemy(player) == 1) {
-                System.out.println("Here");
                 heroXF = heroX;
                 heroYF = heroY;
                 board[heroX][heroY] = 0;
